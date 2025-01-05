@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingMeter.Web", "ParkingMeter.Web\ParkingMeter.Web.csproj", "{3A6E518D-50DD-4199-AACF-F0E802C4A834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingMeter.Web", "ParkingMeter.Web\ParkingMeter.Web.csproj", "{3A6E518D-50DD-4199-AACF-F0E802C4A834}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingMeter.Data", "ParkingMeter.Data\ParkingMeter.Data.csproj", "{8E8BDE71-FD65-4E99-B704-C682B9E871D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingMeter.Models", "ParkingMeter.Models\ParkingMeter.Models.csproj", "{9CE9E430-8C0D-495B-B457-8DBC253B8630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{3A6E518D-50DD-4199-AACF-F0E802C4A834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A6E518D-50DD-4199-AACF-F0E802C4A834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A6E518D-50DD-4199-AACF-F0E802C4A834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E8BDE71-FD65-4E99-B704-C682B9E871D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E8BDE71-FD65-4E99-B704-C682B9E871D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E8BDE71-FD65-4E99-B704-C682B9E871D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E8BDE71-FD65-4E99-B704-C682B9E871D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE9E430-8C0D-495B-B457-8DBC253B8630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE9E430-8C0D-495B-B457-8DBC253B8630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE9E430-8C0D-495B-B457-8DBC253B8630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE9E430-8C0D-495B-B457-8DBC253B8630}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
