@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingMeter.Data", "Parkin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingMeter.Models", "ParkingMeter.Models\ParkingMeter.Models.csproj", "{9CE9E430-8C0D-495B-B457-8DBC253B8630}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingMeter.Repository", "ParkingMeter.Repository\ParkingMeter.Repository.csproj", "{5B59F9A2-52A7-484F-86FA-040A822F6BC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingMeter.Repository", "ParkingMeter.Repository\ParkingMeter.Repository.csproj", "{5B59F9A2-52A7-484F-86FA-040A822F6BC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingMeter.Business", "ParkingMeter.Business\ParkingMeter.Business.csproj", "{6802AE1A-1731-4CBA-A4EF-E88D7F3E8F0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5B59F9A2-52A7-484F-86FA-040A822F6BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B59F9A2-52A7-484F-86FA-040A822F6BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B59F9A2-52A7-484F-86FA-040A822F6BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6802AE1A-1731-4CBA-A4EF-E88D7F3E8F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6802AE1A-1731-4CBA-A4EF-E88D7F3E8F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6802AE1A-1731-4CBA-A4EF-E88D7F3E8F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6802AE1A-1731-4CBA-A4EF-E88D7F3E8F0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
