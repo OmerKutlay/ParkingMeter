@@ -13,7 +13,7 @@ namespace ParkingMeter.Models
         public string VehicleType { get; set; } = "Otomobil";
         public string? ContactNumber { get; set; }
         public bool IsSubscribed { get; set; } = false;
-        public DateTime EntryTime { get; set; }
+        public DateTime EntryTime { get; set; } = DateTime.Now;
         public DateTime? ExitTime { get; set; }
         public int? ParkSlotId { get; set; }
         public virtual ParkSlot? ParkSlot { get; set; }
