@@ -11,6 +11,7 @@ namespace ParkingMeter.Models
     {
         public string Plate { get; set; }
         public string VehicleType { get; set; } = "Otomobil";
+        public int Amount { get; set; } 
         public string? ContactNumber { get; set; }
         public bool IsSubscribed { get; set; } = false;
         public DateTime EntryTime { get; set; } = DateTime.Now;

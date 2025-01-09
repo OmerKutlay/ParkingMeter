@@ -8,7 +8,7 @@ namespace ParkingMeter.Models
 {
     public class Payment:BaseModel
     {
-        public decimal Amount { get; set; } = 0;
+        public decimal Recipe { get; set; } = 1;
         public bool IsPaid { get; set; } = false;
         public int VehicleId { get; set; }
         public virtual Vehicle Vehicle { get; set; }
