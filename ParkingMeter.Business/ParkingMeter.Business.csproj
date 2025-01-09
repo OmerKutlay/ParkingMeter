@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
     <Folder Include="Configuration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ParkingMeter.Models\ParkingMeter.Models.csproj" />
+    <ProjectReference Include="..\ParkingMeter.Repository\ParkingMeter.Repository.csproj" />
   </ItemGroup>
 
 </Project>
