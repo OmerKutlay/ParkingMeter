@@ -20,27 +20,28 @@ namespace ParkingMeter.Business.Concrete
 
         public Vehicle Add(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            return _vehicleRepository.Add(vehicle);
         }
 
         public bool Delete(int vehicleId)
         {
-            throw new NotImplementedException();
+            _vehicleRepository.Delete(vehicleId);
+            return true;
         }
 
         public IQueryable<Vehicle> GetAll()
         {
-            throw new NotImplementedException();
+            return _vehicleRepository.GetAll(v => v.IsDeleted == false);
         }
 
         public Vehicle GetById(int vehicleId)
         {
-            throw new NotImplementedException();
+            return _vehicleRepository.GetById(vehicleId);
         }
 
         public Vehicle Update(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            return _vehicleRepository.Update(vehicle);
         }
     }
 }
