@@ -19,17 +19,6 @@ namespace ParkingMeter.Data
 
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-
-        //    modelBuilder.Entity<ParkSlot>()
-        //        .HasOne(ps => ps.Vehicle)
-        //        .WithOne(v => v.ParkSlot)
-        //        .HasForeignKey<Vehicle>(v => v.ParkSlotId);
-        //}
-
-
         public virtual DbSet<ParkSlot> ParkSlots { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
