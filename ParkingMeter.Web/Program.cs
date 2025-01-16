@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ParkingMeter.Business.Configuration;
 using ParkingMeter.Data;
 using System.Text.Json.Serialization;
 
@@ -13,6 +14,9 @@ builder.Services.AddControllersWithViews().AddJsonOptions(option =>
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.RepositoryDI();
+builder.Services.BusinessDI();
 
 var app = builder.Build();
 
