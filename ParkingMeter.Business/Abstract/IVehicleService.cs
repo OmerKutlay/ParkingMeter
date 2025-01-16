@@ -9,8 +9,8 @@ namespace ParkingMeter.Business.Abstract
 {
     public interface IVehicleService
     {
-        Vehicle Add(Vehicle vehicle);
-        Vehicle Update(Vehicle vehicle);
+        Vehicle Add(Vehicle vehicle, List<Payment> payments);
+        Vehicle Update(Vehicle vehicle, List<Payment> payments);
         bool Delete(int vehicleId);
         IQueryable<Vehicle> GetAll();
         Vehicle GetById(int vehicleId);
