@@ -16,11 +16,10 @@ namespace ParkingMeter.Models
         public bool IsSubscribed { get; set; } = false;
         public DateTime EntryTime { get; set; } = DateTime.Now;
         public DateTime? ExitTime { get; set; }
-        public int? ParkSlotId { get; set; }
+        public int ParkSlotId { get; set; }
         public virtual ParkSlot? ParkSlot { get; set; }
         [ForeignKey("Payment")]
-        public int? PaymentId { get; set; }
-        public virtual Payment? Payment { get; set; }
+        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     }
 }
