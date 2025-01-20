@@ -19,6 +19,7 @@ namespace ParkingMeter.Business.Configuration
             services.AddScoped<IParkSlotService, ParkSlotService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IParkingService, ParkingService>();
         }
 
         public static void RepositoryDI(this IServiceCollection services)
