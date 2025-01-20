@@ -20,6 +20,7 @@ namespace ParkingMeter.Models
         public virtual ParkSlot? ParkSlot { get; set; }
         [ForeignKey("Payment")]
         public ICollection<Payment> Payments { get; set; } = new List<Payment>();
+        public ICollection<Parking> Parkings { get; set; }
 
     }
 }
