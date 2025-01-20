@@ -21,7 +21,7 @@ namespace ParkingMeter.Data
 
         public virtual DbSet<ParkSlot> ParkSlots { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
-        public virtual DbSet<Payment> Payment { get; set; }
-        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Parking> Parkings { get; set; }
     }
 }
