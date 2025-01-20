@@ -14,7 +14,6 @@ namespace ParkingMeter.Business.Concrete
     {
         private readonly IRepository<Vehicle> _vehicleRepository;
         private readonly IRepository<ParkSlot> _parkSlotRepository;
-
         public VehicleService(IRepository<Vehicle> vehicleRepository, IRepository<ParkSlot> parkSlotRepository)
         {
             _vehicleRepository = vehicleRepository;
