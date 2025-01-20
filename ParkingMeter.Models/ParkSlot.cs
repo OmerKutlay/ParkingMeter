@@ -15,7 +15,6 @@ namespace ParkingMeter.Models
         [ForeignKey("Vehicle")]
         public int? VehicleId { get; set; }
         public virtual Vehicle? Vehicle { get; set; }
-        public int StatusId { get; set; }
-        public virtual Status Status { get; set; }
+        public ICollection<Parking> Parkings { get; set; }
     }
 }
