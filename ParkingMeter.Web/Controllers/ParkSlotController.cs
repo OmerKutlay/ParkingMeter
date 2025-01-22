@@ -41,7 +41,7 @@ namespace ParkingMeter.Web.Controllers
             return Ok(_parkSlotService.Update(parkSlot));
         }
         [HttpPost]
-        public IActionResult SoftDelete(int id)
+        public IActionResult Delete(int id)
         {
             _parkSlotService.Delete(id);
             return Ok();
