@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingMeter.Data;
 
@@ -11,9 +12,11 @@ using ParkingMeter.Data;
 namespace ParkingMeter.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250123155954_parkSlotIliskiduzenlemesi")]
+    partial class parkSlotIliskiduzenlemesi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,11 +49,16 @@ namespace ParkingMeter.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Row")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PaymentId");
 
                     b.ToTable("ParkSlots");
                 });
@@ -62,9 +70,6 @@ namespace ParkingMeter.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -129,6 +134,9 @@ namespace ParkingMeter.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -168,6 +176,21 @@ namespace ParkingMeter.Data.Migrations
                     b.ToTable("Vehicles");
                 });
 
+            modelBuilder.Entity("ParkingPayment", b =>
+                {
+                    b.Property<int>("ParkingsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ParkingsId", "PaymentsId");
+
+                    b.HasIndex("PaymentsId");
+
+                    b.ToTable("ParkingPayment");
+                });
+
             modelBuilder.Entity("ParkingVehicle", b =>
                 {
                     b.Property<int>("ParkingsId")
@@ -181,6 +204,13 @@ namespace ParkingMeter.Data.Migrations
                     b.HasIndex("VehiclesId");
 
                     b.ToTable("ParkingVehicle");
+                });
+
+            modelBuilder.Entity("ParkingMeter.Models.ParkSlot", b =>
+                {
+                    b.HasOne("ParkingMeter.Models.Payment", null)
+                        .WithMany("ParkSlots")
+                        .HasForeignKey("PaymentId");
                 });
 
             modelBuilder.Entity("ParkingMeter.Models.Parking", b =>
@@ -216,6 +246,21 @@ namespace ParkingMeter.Data.Migrations
                     b.Navigation("ParkSlot");
                 });
 
+            modelBuilder.Entity("ParkingPayment", b =>
+                {
+                    b.HasOne("ParkingMeter.Models.Parking", null)
+                        .WithMany()
+                        .HasForeignKey("ParkingsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ParkingMeter.Models.Payment", null)
+                        .WithMany()
+                        .HasForeignKey("PaymentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ParkingVehicle", b =>
                 {
                     b.HasOne("ParkingMeter.Models.Parking", null)
@@ -236,6 +281,11 @@ namespace ParkingMeter.Data.Migrations
                     b.Navigation("Parkings");
 
                     b.Navigation("Vehicles");
+                });
+
+            modelBuilder.Entity("ParkingMeter.Models.Payment", b =>
+                {
+                    b.Navigation("ParkSlots");
                 });
 
             modelBuilder.Entity("ParkingMeter.Models.Vehicle", b =>

@@ -12,9 +12,7 @@ namespace ParkingMeter.Models
         public string Row { get; set; }
         public string Column { get; set; }
         public bool IsOccupied { get; set; }
-        [ForeignKey("Vehicle")]
-        public int? VehicleId { get; set; }
-        public virtual Vehicle? Vehicle { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
         public ICollection<Parking> Parkings { get; set; }
     }
 }

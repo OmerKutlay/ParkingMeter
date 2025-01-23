@@ -12,7 +12,5 @@ namespace ParkingMeter.Models
         public bool IsPaid { get; set; } = false;
         public int VehicleId { get; set; }
         public virtual Vehicle Vehicle { get; set; }
-        public ICollection<ParkSlot> ParkSlots { get; set; }
-        public ICollection<Parking> Parkings { get; set; }
     }
 }

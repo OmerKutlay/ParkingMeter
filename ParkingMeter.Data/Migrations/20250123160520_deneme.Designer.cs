@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingMeter.Data;
 
@@ -11,9 +12,11 @@ using ParkingMeter.Data;
 namespace ParkingMeter.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250123160520_deneme")]
+    partial class deneme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,11 +49,16 @@ namespace ParkingMeter.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Row")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PaymentId");
 
                     b.ToTable("ParkSlots");
                 });
@@ -62,9 +70,6 @@ namespace ParkingMeter.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -129,6 +134,9 @@ namespace ParkingMeter.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -181,6 +189,13 @@ namespace ParkingMeter.Data.Migrations
                     b.HasIndex("VehiclesId");
 
                     b.ToTable("ParkingVehicle");
+                });
+
+            modelBuilder.Entity("ParkingMeter.Models.ParkSlot", b =>
+                {
+                    b.HasOne("ParkingMeter.Models.Payment", null)
+                        .WithMany("ParkSlots")
+                        .HasForeignKey("PaymentId");
                 });
 
             modelBuilder.Entity("ParkingMeter.Models.Parking", b =>
@@ -236,6 +251,11 @@ namespace ParkingMeter.Data.Migrations
                     b.Navigation("Parkings");
 
                     b.Navigation("Vehicles");
+                });
+
+            modelBuilder.Entity("ParkingMeter.Models.Payment", b =>
+                {
+                    b.Navigation("ParkSlots");
                 });
 
             modelBuilder.Entity("ParkingMeter.Models.Vehicle", b =>

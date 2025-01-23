@@ -67,7 +67,7 @@ namespace ParkingMeter.Business.Concrete
                 Id = ve.Id,
                 Plate = ve.Plate,
                 VehicleType = ve.VehicleType,
-                Amount = ve.Amount,
+    
                 ContactNumber = ve.ContactNumber,
                 IsSubscribed = ve.IsSubscribed,
                 ExitTime = ve.ExitTime,
