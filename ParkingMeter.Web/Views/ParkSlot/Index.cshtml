@@ -1,0 +1,176 @@
+﻿﻿<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <div class="row">
+                    <div class="col-11 fs-3 text-white">
+                        <box-icon name="dining" color="white" size="sm" animation="tada"></box-icon> Park Alanları
+                    </div>
+
+                    <div class="col-1 d-flex justify-content-end">
+                        <a id="btnAdd" href="#" class="btn btn-warning">+ Yeni Park Alanı</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="tblParkSlots" class="table table-hovered table-striped table-bordered"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* MODAL *@
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 row">
+                    <label class="form-label">Park Alanı Sütunu: </label>
+                    <input type="text" id="txtParkSlotColumn" placeholder="Lütfen Park alanı sütun adı giriniz" class="form-control" required />
+                </div>
+                <div class="mb-3 row">
+                    <label class="form-label">Park Alanı Sırası: </label>
+                    <input type="number" id="txtParkSlotRow"  min="1" max="5" placeholder="Lütfen Park Alanı adı giriniz" class="form-control" required />
+                </div>
+                <div class="mb-3 row">
+                    <label class="form-label">Park Alanı Durumu: </label>
+                    <input type="checkbox" id="chkIsOccupied" /> Dolu
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="form-label">Araç</label>
+                    <select class="form-select" id="ddlVehicle"></select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" id="btnSave" class="btn btn-primary"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var DataTable = "";
+
+                  $(document).ready(function () {
+            console.log("Sayfa yüklendi, DataTable başlatılıyor...");
+
+            var DataTable = $("#tblParkSlots").DataTable({
+                ajax: {
+                    url: '/ParkSlot/GetAll',
+                },
+                columns: [
+                    { data: 'id', title: 'ID' },
+                    { data: 'column', title: 'Sütun' },
+                    { data: 'row', title: 'Sıra' },
+                    { data: 'vehicle', title: 'Araç' },
+                    {
+                        data: 'isOccupied',
+                        title: 'Durum',
+                        render: (data) => data ? '🟥 Dolu' : '🟩 Boş'
+                    },
+                    {
+                        data: 'id',
+                        title: 'İşlemler',
+                        render: (data) => {
+                            return `
+                                <a onclick="updateParkSlot(${data}, this)" title="Düzenle" href="#">
+                                    <i class="bi bi-pencil" style="color: blue; font-size: 1.2em;"></i>
+                                </a>
+                                <a onclick="deleteParkSlot(${data}, this)" title="Sil" href="#">
+                                    <i class="bi bi-trash" style="color: red; font-size: 1.2em;"></i>
+                                </a>`;
+                        }
+                    }
+                ]
+            });
+
+            $("#btnAdd").click(function () {
+                $("#modal").modal("show");
+                $("#modalTitle").text("Yeni Park Alanı Ekle");
+                $("#txtParkSlotColumn").val("");
+                $("#txtParkSlotRow").val("");
+                $("#chkIsOccupied").prop('checked', false);
+                $("#ddlVehicle").val("");
+                $("#btnSave").text("Kaydet").off().click(() => {
+                    let newSlot = {
+                        column: $("#txtParkSlotColumn").val(),
+                        row: $("#txtParkSlotRow").val(),
+                        isOccupied: $("#chkIsOccupied").is(":checked"),
+                        vehicle: $("#ddlVehicle").val()
+                    };
+
+                    $.ajax({
+                        url: '/ParkSlot/Add',
+                        type: 'POST',
+                        contentType: "application/json",
+                        data: JSON.stringify(newSlot),
+                        success: (res) => {
+                            DataTable.ajax.reload(null, false);
+                            $("#modal").modal("hide");
+                        }
+                    });
+                });
+            });
+        });
+
+        // Park alanını silme fonksiyonu
+        function deleteParkSlot(slotId, button) {
+            if (!confirm("Bu park alanını silmek istediğinize emin misiniz?")) return;
+
+            $.ajax({
+                url: '/ParkSlot/Delete',
+                type: 'POST',
+                data: { id: slotId },
+                success: () => {
+                    let row = $(button).closest("tr");
+                    let table = $("#tblParkSlots").DataTable();
+                    table.row(row).remove().draw(false);
+                }
+            });
+        }
+
+        // Park alanını düzenleme fonksiyonu
+               function updateParkSlot(slotId, button) {
+            $.ajax({
+                url: '/ParkSlot/GetById',
+                type: 'POST',
+                data: { id: slotId },
+                success: (res) => {
+                    $("#modal").modal("show");
+                    $("#txtParkSlotColumn").val(res.column);
+                    $("#txtParkSlotRow").val(res.row);
+                    $("#chkIsOccupied").prop("checked", res.isOccupied);
+                    $("#ddlVehicle").val(res.vehicle);
+                    $("#modalTitle").text("Park Alanını Düzenle");
+                    $("#btnSave").text("Güncelle").off().click(() => {
+                        res.column = $("#txtParkSlotColumn").val();
+                        res.row = $("#txtParkSlotRow").val();
+                        res.isOccupied = $("#chkIsOccupied").is(":checked");
+                        res.vehicle = $("#ddlVehicle").val();
+
+                        $.ajax({
+                            url: '/ParkSlot/Update',
+                            type: 'POST',
+                            contentType: "application/json",
+                            data: JSON.stringify(res),
+                            success: () => {
+                                let table = $("#tblParkSlots").DataTable();
+                                table.ajax.reload(null, false);
+                                $("#modal").modal("hide");
+                            }
+                        });
+                    });
+                }
+            });
+        }
+
+    </script>
+}
