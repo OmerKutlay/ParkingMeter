@@ -30,7 +30,7 @@ namespace ParkingMeter.Business.Concrete
 
         public IQueryable<ParkSlot> GetAll()
         {
-            return _parkSlotRepository.GetAll();
+            return _parkSlotRepository.GetAll(ps => ps.IsDeleted == false);
         }
 
         public ParkSlot GetById(int id)
